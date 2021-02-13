@@ -1,1 +1,2 @@
 # Collaborative Filtering based Recommendation system using kNN
+The biggest use case of k-NN search might be Recommendation Systems. If you know a user likes a particular item, then you can recommend similar items for them. This applies to recommending products, recommending media to consumer, or even ‘recommending’ advertisements to display to a user. When products used by two users are compared, if there is a high match, then any product used by one of the users can be recommended to the other. This is collaborative filtering.
