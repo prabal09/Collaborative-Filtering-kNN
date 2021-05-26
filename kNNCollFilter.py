@@ -11,45 +11,6 @@ from scipy.sparse import csr_matrix
 from sklearn.neighbors import NearestNeighbors
 import numpy as np
 
-#path_movies = 'D:\\EnjoyAlgorithm\\ml-latest-small\\movies.csv'
-#path_ratings = 'D:\\EnjoyAlgorithm\\ml-latest-small\\ratings.csv'
-#
-#df_movies = pd.read_csv(path_movies,
-#    usecols=['movieId', 'title'],
-#    dtype={'movieId': 'int32', 'title': 'str'})
-#df_ratings = pd.read_csv(path_ratings,
-#    usecols=['userId', 'movieId', 'rating'],
-#    dtype={'userId': 'int32', 'movieId': 'int32', 'rating': 'float32'})
-## filter data
-#movie_rating_thres = 50
-#user_rating_thres = 50
-#model = NearestNeighbors()
-#n_neighbors,algorithm,metric,n_jobs = 10, 'brute', 'cosine', -1  #k = 10,20,30
-#model.set_params(**{
-#            'n_neighbors': n_neighbors,
-#            'algorithm': algorithm,
-#            'metric': metric,
-#            'n_jobs': n_jobs})
-##print(glob.glob(path_movies+'\*'))
-##print(glob.glob(path_ratings+'\*'))
-#df_movies_cnt = pd.DataFrame(
-#    df_ratings.groupby('movieId').size(),
-#    columns=['count'])
-#popular_movies = list(set(df_movies_cnt.query('count >= @movie_rating_thres').index))  # noqa
-
-#Preprocessing
-
-	
-# dense to sparse
-#from numpy import array
-#from scipy.sparse import csr_matrix
-#A = array([[1, 0, 0], [0, 1, 0], [0, 0, 1]])
-#C = csr_matrix(A)
-#D = C.todense()
-#
-#print(A)
-#print(C)
-#print(D)
 
 from difflib import SequenceMatcher
 def seqmatch(string1,string2):
@@ -68,8 +29,7 @@ def PreProcess(df_movies,df_ratings,mf=None):
     movie_user_mat = df_filter.pivot(
         index='movieId', columns='userId', values='rating').fillna(0)
     return movie_user_mat
-#movie_user_mat = PreProcess(df_movies,df_ratings)
-#csr_mat = csr_matrix(movie_user_mat.values)    
+  
 
 def MatchSequence(watched_movie,hashmap):
     match_seq = []
@@ -112,8 +72,8 @@ def recommend(model,csr_mat,hashmap,watched_movie,n_recommendations = 10):
 
 
 if __name__ =="__main__":
-    path_movies = 'D:\\EnjoyAlgorithm\\ml-latest-small\\movies.csv'
-    path_ratings = 'D:\\EnjoyAlgorithm\\ml-latest-small\\ratings.csv'
+    path_movies = 'D:\\ml-latest-small\\movies.csv'
+    path_ratings = 'D:\\ml-latest-small\\ratings.csv'
     
     df_movies = pd.read_csv(path_movies,
         usecols=['movieId', 'title'],
